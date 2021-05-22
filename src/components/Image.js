@@ -1,18 +1,16 @@
 import React from 'react';
 import Image from 'react-bootstrap/Image';
 
-function Avatar(props) {
+function Img(props) {
 	return (
 		<Image
 			src={props.avatarURL}
 			roundedCircle
-			fluid
-			width="40"
-			height="40"
+			width="30"
+			height="30"
 			className={props.className}
-			alt="user avatar"
 		/>
 	);
 }
 
-export default Avatar;
+export default Img;

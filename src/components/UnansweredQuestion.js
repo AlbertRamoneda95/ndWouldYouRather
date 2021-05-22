@@ -6,15 +6,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { handleAddAnswer } from '../actions/questions';
-import { formatDate } from '../utils/helpers';
-import PageNotFound from './PageNotFound';
-import Avatar from './Avatar';
+import Img from './Image';
 
 class UnansweredQuestion extends Component {
-	state = {
-		errorMsg: ''
-	};
-
 	handleSubmit = (id, e) => {
 		const answer = this.form.answer.value;
 		const { dispatch } = this.props;
@@ -23,28 +17,20 @@ class UnansweredQuestion extends Component {
 
 		if (answer !== '') {
 			dispatch(handleAddAnswer(id, answer));
-		} else {
-			this.setState({ errorMsg: 'You must make a choice' });
 		}
 	};
 
 	render() {
 		const { question, author } = this.props;
-
-		if (question === null) {
-			return <PageNotFound />;
-		}
-
-		const { optionOne, optionTwo, timestamp, id } = question;
+		const { optionOne, optionTwo, id } = question;
 		const { name, avatarURL } = author;
-		const { errorMsg } = this.state;
 
 		return (
 			<Row className="justify-content-center">
 				<Col xs={12} md={6}>
 					<Card bg="light" className="m-3">
 						<Card.Header>
-							<Avatar avatarURL={avatarURL} className="mr-2" />
+							<Img avatarURL={avatarURL} className="mr-2" />
 							{name} asks:
 						</Card.Header>
 
@@ -53,8 +39,8 @@ class UnansweredQuestion extends Component {
 								onSubmit={(e) => this.handleSubmit(id, e)}
 								ref={(f) => (this.form = f)}
 							>
-								{errorMsg ? (
-									<p className="text-danger">{errorMsg}</p>
+								{this.form && this.form.answer.value ? (
+									<p className="text-danger">Please select a choice </p>
 								) : null}
 								<Form.Check
 									custom
@@ -74,14 +60,11 @@ class UnansweredQuestion extends Component {
 									name="answer"
 									className="mb-2"
 								/>
-								<Button type="submit" variant="outline-dark">
+								<Button type="submit">
 									Vote
 								</Button>
 							</Form>
 						</Card.Body>
-						<Card.Footer>
-							<small className="text-muted">{formatDate(timestamp)}</small>
-						</Card.Footer>
 					</Card>
 				</Col>
 			</Row>
@@ -93,7 +76,7 @@ function mapStateToProps({ questions, users }, { id }) {
 	const question = questions[id];
 
 	return {
-		question: question ? question : null,
+		question:question,
 		author: question ? users[question.author] : null
 	};
 }

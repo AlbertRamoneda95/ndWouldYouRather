@@ -1,30 +1,26 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import BriefQuestionsList from './BriefQuestionsList';
+import QuestionList from './QuestionList';
 
 class Home extends Component {
 	render() {
 		const { answeredQuestionIds, unansweredQuestionIds } = this.props;
 
 		return (
-			<Fragment>
+			<div>
 				<Tabs>
 					<Tab eventKey="unanswered" title="Unanswered Questions">
-						<BriefQuestionsList
-							idsList={unansweredQuestionIds}
-							emptyListNote="No more Unswered Questions! "
+						<QuestionList ids={unansweredQuestionIds}
 						/>
 					</Tab>
 					<Tab eventKey="answered" title="Answered Questions">
-						<BriefQuestionsList
-							idsList={answeredQuestionIds}
-							emptyListNote="No Answered Questions yet! What are you waiting for?"
+						<QuestionList ids={answeredQuestionIds}
 						/>
 					</Tab>
 				</Tabs>
-			</Fragment>
+			</div>
 		);
 	}
 }

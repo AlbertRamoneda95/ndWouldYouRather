@@ -26,7 +26,7 @@ class Login extends Component {
 	};
 
 	render() {
-		const { userNames } = this.props;
+		const { users } = this.props;
 		const { errorMsg } = this.state;
 
 		return (
@@ -37,7 +37,7 @@ class Login extends Component {
 						<Card.Body>
 							<Form onSubmit={this.handleSubmit}>
 								<Form.Group controlId="formGridState">
-									<Form.Label>Username</Form.Label>
+									<Form.Label>User:</Form.Label>
 									{errorMsg ? (
 										<p className="text-danger">{errorMsg}</p>
 									) : null}
@@ -46,8 +46,8 @@ class Login extends Component {
 										as="select"
 										ref={(id) => (this.userID = id)}
 									>
-										<option value="">Select user</option>
-										{userNames.map((item) => (
+										<option value="">Select a user</option>
+										{users.map((item) => (
 											<option value={item.value} key={item.value}>
 												{item.label}
 											</option>
@@ -69,7 +69,7 @@ class Login extends Component {
 
 function mapStateToProps({ users }) {
 	return {
-		userNames: Object.keys(users).map((id) => ({
+		users: Object.keys(users).map((id) => ({
 			value: id,
 			label: users[id].name
 		}))

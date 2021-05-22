@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Spinner from 'react-bootstrap/Spinner';
 import Login from './components/Login';
-import PrivateApp from './components/PrivateApp';
-import { handleInitialData } from './actions/shared';
+import Main from './components/Main';
+import { handleInitialData } from './actions/initialData';
 
 class App extends Component {
 	componentDidMount() {
@@ -14,23 +14,24 @@ class App extends Component {
 		const { authedUser, loadingBar } = this.props;
 
 		if (loadingBar.default === undefined || loadingBar.default === 1) {
-			//loading
 			return (
-				<div className="d-flex justify-content-center">
-					<Spinner
-						animation="border"
-						role="status"
-						variant="secondary"
-						className="my-5"
-					>
-						<span className="sr-only">Loading...</span>
-					</Spinner>
-				</div>
+				getSpinner()
 			);
 		} else {
-			return <Fragment>{!authedUser ? <Login /> : <PrivateApp />}</Fragment>;
+			return <div>{!authedUser ? <Login /> : <Main />}</div>;
 		}
 	}
+}
+
+function getSpinner() {
+	return <div className="d-flex justify-content-center">
+		<Spinner
+			animation="border"
+			className="my-5"
+		>
+			<span className="sr-only">Loading...</span>
+		</Spinner>
+	</div>;
 }
 
 function mapStateToProps({ authedUser, loadingBar }) {

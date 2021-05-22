@@ -1,6 +1,6 @@
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
-import { getInitialData } from '../utils/api';
+import { getInitialData } from '../utils/_DATA';
 import { receiveUsers } from './users';
 import { receiveQuestions } from './questions';
 

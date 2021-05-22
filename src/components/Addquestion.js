@@ -10,12 +10,12 @@ import { handleAddQuestion } from '../actions/questions';
 
 class NewQuestion extends Component {
 	state = {
-		optionOne: '',
-		optionTwo: '',
+		firstOption: '',
+		secondOption: '',
 		toHome: false
 	};
 
-	handleInputChange = (e) => {
+	handleChange = (e) => {
 		const name = e.target.name;
 		const value = e.target.value;
 		this.setState({
@@ -24,23 +24,23 @@ class NewQuestion extends Component {
 	};
 
 	handleSubmit = (e) => {
-		const { optionOne, optionTwo } = this.state;
+		const { firstOption, secondOption } = this.state;
 		const { dispatch } = this.props;
 
 		e.preventDefault();
 
 		this.setState(
 			{
-				optionOne: '',
-				optionTwo: '',
+				firstOption: '',
+				secondOption: '',
 				toHome: true
 			},
-			() => dispatch(handleAddQuestion(optionOne, optionTwo))
+			() => dispatch(handleAddQuestion(firstOption, secondOption))
 		);
 	};
 
 	render() {
-		const { optionOne, optionTwo, toHome } = this.state;
+		const { firstOption, secondOption, toHome } = this.state;
 
 		if (toHome === true) return <Redirect to="/" />;
 
@@ -54,33 +54,31 @@ class NewQuestion extends Component {
 						<Card bg="light" className="m-3 text-center">
 							<Card.Body>
 								<Form onSubmit={this.handleSubmit}>
-									<Form.Group controlId="optionOne">
-										<Form.Label>Choice One</Form.Label>
+									<Form.Group controlId="firstOption">
 										<Form.Control
 											type="text"
-											name="optionOne"
-											value={optionOne}
-											onChange={this.handleInputChange}
+											name="firstOption"
+											value={firstOption}
+											onChange={this.handleChange}
 										/>
 									</Form.Group>
 									<h3>
-										<small>OR</small>
+										<p>OR</p>
 									</h3>
-									<Form.Group controlId="optionTwo">
-										<Form.Label>Choice Two</Form.Label>
+									<Form.Group controlId="secondOption">
 										<Form.Control
 											type="text"
-											name="optionTwo"
-											value={optionTwo}
-											onChange={this.handleInputChange}
+											name="secondOption"
+											value={secondOption}
+											onChange={this.handleChange}
 										/>
 									</Form.Group>
 									<Button
 										type="submit"
 										variant="outline-dark"
-										disabled={optionOne === '' || optionTwo === ''}
+										disabled={!firstOption || !secondOption}
 									>
-										Submit
+										Save
 									</Button>
 								</Form>
 							</Card.Body>
