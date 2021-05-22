@@ -17,9 +17,9 @@ class QuestionList extends Component {
 				</h2>
 				{questions.length ? (
 					questions.map((question) => {
-						let {author, id, optionOne, optionTwo,avatarURL} = question;
+						let {author, id, optionOne, optionTwo,avatarURL, timestamp} = question;
 						return(
-							<Row className="justify-content-center">
+							<Row className="justify-content-center" key={id}>
 								<Col xs={12} md={6}>
 									<Card bg="light" className="m-3">
 										<Card.Header>
@@ -31,9 +31,14 @@ class QuestionList extends Component {
 											<Card.Text>or </Card.Text>
 											<Card.Text>{optionTwo.text} </Card.Text>
 											<Link to={`/questions/${id}`}>
-												<Button>View Question</Button>
+												<Button variant="outline-dark">View Question</Button>
 											</Link>
 										</Card.Body>
+										<Card.Footer>
+											<Card.Text>
+												{new Date(timestamp).toLocaleString()}
+											</Card.Text>
+										</Card.Footer>
 									</Card>
 								</Col>
 							</Row>
@@ -54,6 +59,7 @@ function mapStateToProps({ questions, users}, {ids}) {
 	
 	const filteredQuestions = Object.keys(questions)
 	.filter(key => ids.includes(key))
+	.sort((a, b) => questions[b].timestamp - questions[a].timestamp)
 	.reduce((obj, key) => {
 	obj[key] = questions[key];
 	return obj;

@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Card from 'react-bootstrap/Card';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
+import {Card, Form, Row, Col, Button} from 'react-bootstrap';
 import { handleAddAnswer } from '../actions/questions';
+import { NavLink } from 'react-router-dom';
 import Img from './Image';
 
 class UnansweredQuestion extends Component {
@@ -65,6 +62,9 @@ class UnansweredQuestion extends Component {
 								</Button>
 							</Form>
 						</Card.Body>
+					</Card>
+					<Card>
+						<Button as={NavLink} to="/" exact variant="outline-dark"> Go Back</Button>
 					</Card>
 				</Col>
 			</Row>

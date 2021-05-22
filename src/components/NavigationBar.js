@@ -10,6 +10,7 @@ function NavigationBar(props) {
 	const { user, dispatch } = props;
 
 	const handleLogout = () => {
+		//dispatch user reset
 		dispatch(reSetAuthedUser());
 	};
 
@@ -42,7 +43,7 @@ function getNavLinks(user, handleLogout) {
 		</Nav>
 		<Nav className="align-items-start">
 			<Navbar.Text>{user.name}</Navbar.Text>
-			<Button
+			<Button as={NavLink} to="/" exact
 				variant="outline-dark"
 				onClick={handleLogout}
 			>
