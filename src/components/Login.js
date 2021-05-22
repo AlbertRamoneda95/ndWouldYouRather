@@ -8,10 +8,6 @@ import Button from 'react-bootstrap/Button';
 import { setAuthedUser } from '../actions/authedUser';
 
 class Login extends Component {
-	state = {
-		errorMsg: ''
-	};
-
 	handleSubmit = (e) => {
 		const userID = this.userID.value;
 		const { dispatch } = this.props;
@@ -20,15 +16,11 @@ class Login extends Component {
 
 		if (userID !== '') {
 			dispatch(setAuthedUser(userID));
-		} else {
-			this.setState({ errorMsg: 'Choose a username' });
 		}
 	};
 
 	render() {
 		const { users } = this.props;
-		const { errorMsg } = this.state;
-
 		return (
 			<Row className="justify-content-center align-items-center min-vh-100">
 				<Col xs={12} md={4}>
@@ -38,10 +30,6 @@ class Login extends Component {
 							<Form onSubmit={this.handleSubmit}>
 								<Form.Group controlId="formGridState">
 									<Form.Label>User:</Form.Label>
-									{errorMsg ? (
-										<p className="text-danger">{errorMsg}</p>
-									) : null}
-
 									<Form.Control
 										as="select"
 										ref={(id) => (this.userID = id)}
