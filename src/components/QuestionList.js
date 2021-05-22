@@ -31,7 +31,7 @@ class QuestionList extends Component {
 											<Card.Text>or </Card.Text>
 											<Card.Text>{optionTwo.text} </Card.Text>
 											<Link to={`/questions/${id}`}>
-												<Button variant="outline-dark">View Question</Button>
+												<Button>View Question</Button>
 											</Link>
 										</Card.Body>
 									</Card>

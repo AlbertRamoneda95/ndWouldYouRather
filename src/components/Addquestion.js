@@ -75,7 +75,6 @@ class NewQuestion extends Component {
 									</Form.Group>
 									<Button
 										type="submit"
-										variant="outline-dark"
 										disabled={!firstOption || !secondOption}
 									>
 										Save
