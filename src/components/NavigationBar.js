@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 import { reSetAuthedUser } from '../actions/authedUser';
+import Img from './Image';
 
 function NavigationBar(props) {
 	const { user, dispatch } = props;
@@ -42,7 +43,9 @@ function getNavLinks(user, handleLogout) {
 			</Nav.Link>
 		</Nav>
 		<Nav className="align-items-start">
-			<Navbar.Text>{user.name}</Navbar.Text>
+			<Navbar.Text>
+				<Img avatarURL={user.avatarURL} className="mr-4" />	
+			</Navbar.Text>
 			<Button as={NavLink} to="/" exact
 				variant="outline-dark"
 				onClick={handleLogout}

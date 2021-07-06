@@ -9,7 +9,7 @@ import Image from './Image';
 
 class QuestionList extends Component {
 	render() {
-		const {questions} = this.props;
+		const {questions, users} = this.props;
 		return (
 			<div>
 				<h2 className="text-center my-3">
@@ -24,7 +24,7 @@ class QuestionList extends Component {
 									<Card bg="light" className="m-3">
 										<Card.Header>
 											<Image avatarURL={avatarURL} className="mr-2" />
-											{author} asks:
+											{users[author].name} asks:
 										</Card.Header>
 										<Card.Body className="text-center">
 											<Card.Text>{optionOne.text} </Card.Text>
